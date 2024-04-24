@@ -1,0 +1,81 @@
+form {
+  margin-right: 15px;
+}
+
+header nav {
+  height: 60px;
+  border-radius: 12px;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #2f3651;
+}
+
+h1 {
+  color: white;
+  margin-left: 15px;
+  font-weight: 800;
+}
+
+h2 {
+  color: white;
+  font-style: bold;
+}
+
+h3 {
+  color: white;
+  font-style: italic;
+}
+
+h6 {
+  color: white;
+}
+
+p {
+  color: white;
+  font-size: 12px;
+}
+
+.formstyle {
+  font-size: 15px;
+  border: none;
+  padding: 3px;
+  border-radius: 5px;
+  color: #24293e;
+}
+
+#listDiv {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#contentCard {
+  background-color: #2f3651;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 12px;
+  width: 200px;
+}
+
+#personCard {
+  background-color: #2f3651;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 12px;
+  width: 200px;
+}
+
+#posterImg {
+  width: 100%;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+body {
+  background-color: #24293e;
+  font-family: "Poppins", sans-serif;
+}
