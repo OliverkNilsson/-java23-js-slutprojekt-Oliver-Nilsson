@@ -36,7 +36,6 @@ export function displayMovies(movieContentArray) {
     if (!plot) {
       moviePlotEl.innerText = "Plot not available right now!";
     }
-
     contentCardEl.append(posterImgEl);
     contentCardEl.append(movieTitleEl);
     contentCardEl.append(releaseDateEl);
@@ -85,11 +84,11 @@ export function displayPerson(personContentArray) {
 
       if (mediaType == "movie") {
         let liEl = document.createElement("li");
-        liEl.innerText = mediaType + " : " + movieTitle;
+        liEl.innerText = mediaType.toUpperCase() + ": " + movieTitle;
         ulEl.append(liEl);
       } else if (mediaType == "tv") {
         let liEl = document.createElement("li");
-        liEl.innerText = mediaType + " : " + seriesTitle;
+        liEl.innerText = mediaType.toUpperCase() + ": " + seriesTitle;
         ulEl.append(liEl);
       }
 

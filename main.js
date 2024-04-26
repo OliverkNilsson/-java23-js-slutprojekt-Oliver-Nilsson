@@ -9,19 +9,41 @@ import {
 const topRatedButton = document.getElementById("topRated");
 const topTrendingButton = document.getElementById("topTrending");
 const searchButton = document.getElementById("searchButton");
+const listDiv = document.getElementById("listDiv");
+const pageText = document.getElementById('pageText');
+
+const errorCard = document.createElement("div");
+errorCard.id = "errorCard";
 
 // Knapp för att visa de mest visade filmerna just nu
 topTrendingButton.addEventListener("click", (event) => {
   event.preventDefault();
-  console.log(topTrending());
-  topTrending().then(displayMovies);
+
+  pageText.innerText = "Top 10 trending movies: ";
+
+  topTrending()
+    .then(displayMovies)
+    .catch((error) => {
+      errorCard.innerText =
+        "ERROR: " + error.message + "! Try again or come back later!";
+      listDiv.append(errorCard);
+    });
 });
 
 // Knapp för att visa de högt rankade filmerna just nu
 topRatedButton.addEventListener("click", (event) => {
   event.preventDefault();
-  console.log(topRated());
-  topRated().then(displayMovies);
+
+  pageText.innerText = "Top 10 rated movies: ";
+
+  topRated()
+    .then(displayMovies)
+    .catch((error) => {
+      listDiv.innerHTML = "";
+      errorCard.innerText =
+        "ERROR: " + error.message + "! Try again or come back later!";
+      listDiv.append(errorCard);
+    });
 });
 
 // Knapp för att söka på antingen personer eller filmer
@@ -30,12 +52,27 @@ topRatedButton.addEventListener("click", (event) => {
 searchButton.addEventListener("click", (event) => {
   event.preventDefault();
 
+  pageText.innerText = "Search results: ";
+
   const selection = document.getElementById("dropdown").value;
-  console.log(selection);
   if (selection == "movie") {
-    searchMovie().then(displayMovies);
+    searchMovie()
+      .then(displayMovies)
+      .catch((error) => {
+        listDiv.innerHTML = "";
+        errorCard.innerText =
+          "No movies found by that name, try something else!";
+        listDiv.append(errorCard);
+      });
   } else if (selection == "person") {
     console.log(searchPerson());
-    searchPerson().then(displayPerson);
+    searchPerson()
+      .then(displayPerson)
+      .catch((error) => {
+        listDiv.innerHTML = "";
+        errorCard.innerText =
+          "No person found by that name, try something else!";
+        listDiv.append(errorCard);
+      });
   }
 });

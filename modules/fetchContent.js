@@ -16,9 +16,9 @@ export async function topTrending() {
   if (response.ok) {
     const data = await response.json();
 
-    return data.results.splice(0,10);
-  } else if (response.status == 404) {
-    throw new Error("Movies not found");
+    return data.results.splice(0, 10);
+  } else {
+    console.error("Failed");
   }
 }
 
@@ -31,7 +31,7 @@ export async function topRated() {
   if (response.ok) {
     const data = await response.json();
 
-    return data.results.splice(0,10);
+    return data.results.splice(0, 10);
   } else if (response.status == 404) {
     throw new Error("Movies not found");
   }
@@ -41,12 +41,14 @@ export async function topRated() {
 // Hämtar användarens input till searchTerm och använder i URL
 export async function searchMovie() {
   const searchTermMovie = document.querySelector("input").value;
-
   const url = `https://api.themoviedb.org/3/search/movie?query=${searchTermMovie}&include_adult=false&language=en-US&page=1`;
 
   const response = await fetch(url, options);
   if (response.ok) {
     const data = await response.json();
+    if (data.results.length === 0) {
+      throw new Error("No results for " + searchTermMovie);
+    }
 
     return data.results;
   } else if (response.status == 404) {
@@ -56,12 +58,14 @@ export async function searchMovie() {
 
 export async function searchPerson() {
   const searchTermPerson = document.querySelector("input").value;
-
   const url = `https://api.themoviedb.org/3/search/person?query=${searchTermPerson}&include_adult=false&language=en-US&page=1`;
 
   const response = await fetch(url, options);
   if (response.ok) {
     const data = await response.json();
+    if(data.results.length === 0) {
+      throw new Error("No results for " + searchTermPerson);
+    }
 
     return data.results;
   } else if (response.status == 404) {
