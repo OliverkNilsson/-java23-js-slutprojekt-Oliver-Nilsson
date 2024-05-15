@@ -63,7 +63,7 @@ export async function searchPerson() {
   const response = await fetch(url, options);
   if (response.ok) {
     const data = await response.json();
-    if(data.results.length === 0) {
+    if (data.results.length === 0) {
       throw new Error("No results for " + searchTermPerson);
     }
 

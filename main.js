@@ -10,7 +10,7 @@ const topRatedButton = document.getElementById("topRated");
 const topTrendingButton = document.getElementById("topTrending");
 const searchButton = document.getElementById("searchButton");
 const listDiv = document.getElementById("listDiv");
-const pageText = document.getElementById('pageText');
+const pageText = document.getElementById("pageText");
 
 const errorCard = document.createElement("div");
 errorCard.id = "errorCard";
@@ -24,8 +24,13 @@ topTrendingButton.addEventListener("click", (event) => {
   topTrending()
     .then(displayMovies)
     .catch((error) => {
-      errorCard.innerText =
-        "ERROR: " + error.message + "! Try again or come back later!";
+      listDiv.innerHTML = "";
+      if (error instanceof TypeError) {
+        errorCard.innerText = "Network/server error, please try again later!";
+      } else {
+        errorCard.innerText =
+          "ERROR: " + error.message + "! Try again or come back later!";
+      }
       listDiv.append(errorCard);
     });
 });
@@ -40,8 +45,12 @@ topRatedButton.addEventListener("click", (event) => {
     .then(displayMovies)
     .catch((error) => {
       listDiv.innerHTML = "";
-      errorCard.innerText =
-        "ERROR: " + error.message + "! Try again or come back later!";
+      if (error instanceof TypeError) {
+        errorCard.innerText = "Network/server error, please try again later!";
+      } else {
+        errorCard.innerText =
+          "ERROR: " + error.message + "! Try again or come back later!";
+      }
       listDiv.append(errorCard);
     });
 });
@@ -60,8 +69,12 @@ searchButton.addEventListener("click", (event) => {
       .then(displayMovies)
       .catch((error) => {
         listDiv.innerHTML = "";
-        errorCard.innerText =
-          "No movies found by that name, try something else!";
+        if (error instanceof TypeError) {
+          errorCard.innerText = "Network/server error, please try again later!";
+        } else {
+          errorCard.innerText =
+            "No movies found by that name, try something else!";
+        }
         listDiv.append(errorCard);
       });
   } else if (selection == "person") {
@@ -70,8 +83,12 @@ searchButton.addEventListener("click", (event) => {
       .then(displayPerson)
       .catch((error) => {
         listDiv.innerHTML = "";
-        errorCard.innerText =
-          "No person found by that name, try something else!";
+        if (error instanceof TypeError) {
+          errorCard.innerText = "Network/server error, please try again later!";
+        } else {
+          errorCard.innerText =
+            "No person found by that name, try something else!";
+        }
         listDiv.append(errorCard);
       });
   }
